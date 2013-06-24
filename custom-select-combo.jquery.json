@@ -1,0 +1,25 @@
+{
+  "name": "custom-select-combo",
+  "title": "Custom Select Combo",
+  "description": "Creates an input attached to a select to allow for custom user input",
+  "version": "0.1.0",
+  "homepage": "https://github.com/kconarro14/custom-select-combo",
+  "author": {
+    "name": "Kyle Conarro",
+    "url": "https://github.com/kconarro14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kconarro14/custom-select-combo.git"
+  },
+  "licenses": [
+    {
+      "type": "Custom",
+      "url": "https://github.com/kconarro14/custom-select-combo/blob/master/README.md#copyright-and-license"
+    }
+  ],
+  "dependencies": {
+    "jquery": "1.8"
+  },
+  "keywords": []
+}

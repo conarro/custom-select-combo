@@ -1,59 +1,62 @@
-bootstrap-select-toggleizer
+custom-select-combo
 ===========================
 
-![Toggleizer Example](https://www.evernote.com/shard/s39/sh/3e451347-593a-4b38-bcb5-716544b65505/2c5b26afe2bf2b9d1e791f6963b38a2f/deep/0/Screenshot%206/24/13%2012:54%20AM.jpg)
+![Custom Select Combo Example](https://www.evernote.com/shard/s39/sh/530817b9-3aa0-429b-935b-56c2a61e3311/3d42797ec05ec504b14866048b26078d/deep/0/Screenshot%206/24/13%204:26%20PM.jpg)
 
-Convert select boxes into Bootstrap button group toggles
+Creates a custom input alongside select dropdown to allow custom user input
 
 ## Usage
 
 Create a select element:
 
 ```html
-<select class="select-toggleizer">
-  <option>Setting A</option>
-  <option>Setting B</option>
-  <option>Setting C</option>
+<select class="custom-select-combo">
+  <option value='dog'>Dog</option>
+  <option value='cat'>Cat</option>
+  <option value='custom'>Custom</option>
 </select>
 ```
 
-And toggleize it:
+And customize it:
 
 ```javascript
-$('.select-toggleizer').toggleize();
+$('.custom-select-combo').customSelectCombo();
 ```
 
 ## Options
 
 ```javascript
-$('.select-toggleizer').toggleize({
-  buttonClass: '', // additional classes for buttons
-  buttonWidth: 'auto', // explicitly set button width (px or %)
-  hideSelect: true, // hide original <select> element
-  includeEmptyValues: false, // remove empty <option> elements before toggleize
-  onToggleClick: null, // click callback handler, e.g. function(data) { console.log('toggle-click callback', data) }
-  showTooltip: false, // include a tooltip on the button. uses data-title attribute of original <option> if present
-  toggleClass: 'select-toggleizer-container', // class for toggle parent
-  toggleContainer: null, // defaults to append to <select>
-  toggleStyle: 'radio', // radio or checkbox style toggling (single vs. multiple) -- if <select multiple> will use checkbox style toggles
-  tooltipPlacement: 'bottom', // placement of tooltip
-  verbose: false, // log stuff to console
-  vertical: false // arrange buttons vertically
+$('.custom-select-combo').toggleize({
+  alwaysShowInput: false, // show input regardless of selection
+  customInputTarget: null, // id of element to attach the custom input to
+  hideSelectOnTrigger: false, // if true, hides original select box when trigger options are selected
+  inputDimensions: 'auto', // dimensions of the custom input. [width, height] or 'auto'
+  triggerValues: ['custom'], // option values on which to trigger the custom input
+  verbose: false, // output stuff to console
 });
 ```
 
 Options can be set in the initialization object (as above), or data-attributes can be used:
 ```html
-<select class="select-toggleizer" data-button-class='myCustomClass' data-show-tooltip='true'>
-  <option data-title='some tooltip text'>Setting A</option>
-  <option>Setting B</option>
-  <option>Setting C</option>
+<select id="example" data-verbose='true' class="custom-select-combo">
+  <option value='dog'>Dog</option>
+  <option value='cat'>Cat</option>
+  <option value='custom'>Custom</option>
+</select>
+```
+
+For options that trigger the input box, custom values can be set that will be used as the input value instead of the option value:
+```html
+<select id="example" class="custom-select-combo">
+  <option value='dog'>Dog</option>
+  <option value='cat'>Cat</option>
+  <option value='custom' data-input-value="Some custom value for the input">Custom</option>
 </select>
 ```
 
 ## Copyright and license
 
-Copyright (C) 2013 bootstrap-select-toggleizer
+Copyright (C) 2013 Kyle Conarro
 
 Licensed under the MIT license.
 
