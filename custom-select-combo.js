@@ -11,9 +11,10 @@
       alwaysShowInput: false, // show input regardless of selection
       customInputTarget: null, // id of element to attach the custom input to
       hideSelectOnTrigger: false, // if true, hides original select box when trigger options are selected
-      inputDimensions: 'auto', // dimensions of the custom input. [width, height] or 'auto'
+      inputDimensions: 'auto', // dimensions of the custom input. [width, height], 'default' or 'auto'
+      setInputValueOnTrigger: true, // set the value of the input when triggered
       triggerValues: ['custom'], // option values on which to trigger the custom input
-      verbose: false, // output stuff to console
+      verbose: false // output stuff to console
     };
 
   function CustomSelectCombo( element, options ) {
@@ -32,6 +33,7 @@
 
     init: function() {
       if (this.options.verbose) console.log('customSelectCombo', this.$element);
+      if (this.options.verbose) console.log('options', this.options);
       this.createCustomInput(this.$element);
       this.attachSelectEvents(this.$element);
     },
@@ -39,6 +41,10 @@
     createCustomInput: function($el) {
       var self = this;
       var input = $("<input type='text' class='custom-select-combo-input' style='display:none;'>")
+      var placeholder = $el.find('option').filter(function() {
+        return !this.value || $.trim(this.value).length == 0;
+      }).text()
+      input.attr('placeholder', placeholder);
       input.val($el.val()); // set initial value to selection
       self.addInputAttributes($el, input);
       self.attachInputEvents($el, input);
@@ -57,17 +63,20 @@
         input.prop('name', $el.prop('name'));
         $el.removeAttr('name');
       }
+      $el.addClass('custom-select-comboized');
       if (self.options.inputDimensions == 'auto') {
         width = $el.width();
         height = $el.height() + 2;
-      } else {
+      } else if (self.options.inputDimensions != 'default') {
         width = self.options.inputDimensions[0];
         height = self.options.inputDimensions[1];
       }
-      input.css({
-        'width': width,
-        'height': height
-      }); 
+      if (self.options.inputDimensions != 'default') {
+        input.css({
+          'width': width,
+          'height': height
+        });
+      }
       if (self.options.alwaysShowInput) {
         input.show();
       }
@@ -95,6 +104,11 @@
         if (self.options.alwaysShowInput == false) {
           if ($.inArray(selectVal, self.options.triggerValues) > -1) {
             input.show();
+            if (self.options.setInputValueOnTrigger) {
+              input.val(optionVal);
+            } else {
+              input.val('');
+            }
             if (self.options.hideSelectOnTrigger) $el.hide();
           } else {
             input.hide();

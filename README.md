@@ -30,9 +30,10 @@ $('.custom-select-combo').customSelectCombo({
   alwaysShowInput: false, // show input regardless of selection
   customInputTarget: null, // id of element to attach the custom input to
   hideSelectOnTrigger: false, // if true, hides original select box when trigger options are selected
-  inputDimensions: 'auto', // dimensions of the custom input. [width, height] or 'auto'
+  inputDimensions: 'auto', // dimensions of the custom input. [width, height], 'default' or 'auto'
+  setInputValueOnTrigger: true, // set the value of the input when triggered
   triggerValues: ['custom'], // option values on which to trigger the custom input
-  verbose: false, // output stuff to console
+  verbose: false // output stuff to console
 });
 ```
 
